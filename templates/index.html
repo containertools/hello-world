@@ -1,0 +1,21 @@
+<html>
+<head>
+    <title>Hello World</title>
+    <link href="{{ url_for('static', path='/styles.css') }}" rel="stylesheet">
+</head>
+<body>
+    <h1>Hello World</h1>
+    <table>
+        <tr>
+            <th>Key</th>
+            <th>Value</th>
+        </tr>
+        {% for c in config %}
+        <tr>
+            <td>{{ c[0] }}</td>
+            <td>{{ c[1] }}</td>
+        </tr>
+        {% endfor %}     
+    </table>
+</body>
+</html>

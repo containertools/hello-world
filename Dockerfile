@@ -20,5 +20,8 @@ RUN chgrp -R 0 /code && \
 
 USER app
 
+ENV FILES_BASEPATH=/tmp
+
+EXPOSE 8080
 ENTRYPOINT ["/sbin/run.sh"]
 CMD ["app.main:app", "--host", "0.0.0.0", "--port", "8080"]

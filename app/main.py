@@ -1,3 +1,4 @@
+import os
 import socket
 import subprocess
 from typing import Optional
@@ -34,3 +35,10 @@ def hello_json():
     d = get_config()
     d["Hello"] = "World"
     return d
+
+@app.get("/files", response_class=HTMLResponse)
+def hello_json():
+    files_basepath = os.getenv('FILES_BASEPATH', "/tmp")
+    files = "<h1>Hello Files</h1><br>"
+    files += shell("find {}".format(files_basepath)).replace("\n","<br>")
+    return files

@@ -26,4 +26,4 @@ docker run -it -p 8080:8080 -v "$PWD/files:/files" -e FILES_BASEPATH=/files cont
 - [/files](http://localhost:8080/files): List files in the `FILES_BASEPATH` directory.
 
 ## License
-Apache 2.0 - See [LICENSE](license) for more information.
+Apache 2.0 - See [LICENSE](LICENSE) for more information.

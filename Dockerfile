@@ -1,4 +1,4 @@
-FROM python:3.9-alpine
+FROM arm64v8/python:3.9-alpine3.16
 USER root
 
 RUN ln -sf /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime

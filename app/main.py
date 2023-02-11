@@ -17,8 +17,8 @@ def shell(cmd):
     return ps.communicate()[0].decode("utf-8").strip()
 
 def get_config():
-    pid_count = int(shell("cat /sys/fs/cgroup/pids/pids.current"))-1
-    memory_usage = float(shell("cat /sys/fs/cgroup/memory/memory.usage_in_bytes"))/1024/1024
+    pid_count = int(shell("cat /sys/fs/cgroup/pids.current"))-1
+    memory_usage = float(shell("cat /sys/fs/cgroup/memory.current"))/1024/1024
     return {
         "Hostname": socket.gethostname(),
         "IP": socket.gethostbyname(socket.gethostname()),

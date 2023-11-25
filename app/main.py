@@ -17,14 +17,28 @@ def shell(cmd):
     return ps.communicate()[0].decode("utf-8").strip()
 
 def get_config():
-    pid_count = int(shell("cat /sys/fs/cgroup/pids/pids.current"))-1
-    memory_usage = float(shell("cat /sys/fs/cgroup/memory/memory.usage_in_bytes"))/1024/1024
-    return {
-        "Hostname": socket.gethostname(),
-        "IP": socket.gethostbyname(socket.gethostname()),
-        "PID Count": pid_count,
-        "Memory Usage": "{:.2f}MB".format(memory_usage),
-    }
+    try:
+        pid_count = int(shell("cat /sys/fs/cgroup/pids/pids.current"))-1
+    except Exception as e:
+        pid_count = 0
+        print(e)
+    
+    try:
+        memory_usage = float(shell("cat /sys/fs/cgroup/memory/memory.usage_in_bytes"))/1024/1024
+    except Exception as e:
+        memory_usage = 0
+        print(e)
+
+    try:
+        response = {
+            "Hostname": socket.gethostname(),
+            "IP": socket.gethostbyname(socket.gethostname()),
+            "PID Count": pid_count,
+            "Memory Usage": "{:.2f}MB".format(memory_usage),
+        }
+    except Exception as e:
+        response = {"Error": str(e)}
+    return response
 
 @app.get("/")
 def index(request: Request):
